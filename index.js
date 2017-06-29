@@ -25,12 +25,12 @@ app.get('/new', (req, res) => {
   
   console.log('URL: ', fullURL);
   mongodb.connect(process.env.MONGODB, (err, db) => {
-    if (err) throw { msg: "Connectivity Problems.", err: err };
-    
-    console.log('Connection established...');
-    var doc;
-    var urls = db.collection('urls');
     try {
+      if (err) throw { msg: "Connectivity Problems.", err: err };
+
+      console.log('Connection established...');
+      var doc;
+      var urls = db.collection('urls');
       // check if the URL is in the database
       urls.find({
         "fullURL": fullURL
@@ -40,7 +40,7 @@ app.get('/new', (req, res) => {
         console.log(docs);
         if (docs.length > 0) {
           // if already present in the database
-          res.json({
+          res.status(304).json({
             short_url: docs[0].shortURL,
             original_url: docs[0].fullURL
           });
@@ -63,12 +63,10 @@ app.get('/new', (req, res) => {
             urls.insert(doc, (err, data) => {
               if (err) throw { msg: "Connectivity Problems.", err: err };
               
-              res.json({
+              res.status(201).json({
                 short_url: doc.shortURL,
                 original_url: doc.fullURL
               });
-              db.close();
-              console.log('Connections closed...')
             });
           });
         }
@@ -76,7 +74,7 @@ app.get('/new', (req, res) => {
     } catch (e) {
       // handle the exceptions
       console.log(e);
-      res.json({
+      res.status(500).json({
         error: e.msg,
         detail: e.err
       });
