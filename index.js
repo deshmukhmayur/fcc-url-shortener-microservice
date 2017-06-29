@@ -37,11 +37,11 @@ app.get('/new', (req, res) => {
       }).toArray((err, docs) => {
         if (err) throw { msg: "Connectivity Problems.", err: err };
         
-        console.log(docs);
+        // console.log(docs);
         if (docs.length > 0) {
           // if already present in the database
-          res.status(304).json({
-            short_url: docs[0].shortURL,
+          res.json({
+            short_url: 'https://' + req.headers['host'] + '/' + docs[0].shortURL,
             original_url: docs[0].fullURL
           });
         } else {
@@ -64,7 +64,7 @@ app.get('/new', (req, res) => {
               if (err) throw { msg: "Connectivity Problems.", err: err };
               
               res.status(201).json({
-                short_url: doc.shortURL,
+                short_url: 'https://' + req.headers['host'] + '/' + doc.shortURL,
                 original_url: doc.fullURL
               });
             });
