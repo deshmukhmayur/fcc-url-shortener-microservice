@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Timestamp Microservice (JSON API)</title>
+  
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+  
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h3>URL Shortener Microservice (JSON API)</h3>
+    
+    <blockquote>
+      <h5>User stories:</h5>
+      <ol>
+        <li>I can pass a URL as a parameter and I will receive a shortened URL in the JSON response.</li>
+        <li>If I pass an invalid URL that doesn't follow the valid http://www.example.com format, the JSON response will contain an error instead.</li>
+        <li>When I visit that shortened URL, it will redirect me to my original link.</li>
+      </ol>
+    </blockquote>
+    <p>
+      Example usage:
+    </p>
+    <pre class="pink-text">
+    https://deshmukhmayur-fcc-3.glitch.me/new?url=https://www.google.com
+    https://deshmukhmayur-fcc-3.glitch.me/new?url=http://foo.com:80
+    </pre>
+    <p>
+      Example output:
+    </p>
+    <samp><pre class="pink-text">
+    { "original_url":"http://foo.com:80", "short_url":"https://deshmukhmayur-fcc-3.glitch.me/8170" }
+    </pre></samp>
+    
+    
+    <form class="card" action="/new">
+      <div class="input-field">
+        <input id="search" type="search" name="url" placeholder="Or enter a URL to shorten..." required>
+        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+        <i class="material-icons">close</i>
+      </div>
+    </form>
+  </main>
+  
+
+  <footer class="page-footer grey darken-2">
+		<div class="footer-copyright">
+			<div class="container">
+        <a href="https://github.com/deshmukhmayur/fcc-url-shortener-microservice" target="_blank" class="left white-text">Github</a>
+        <span class="right">
+          &copy; 2017 <a href="http://deshmukhmayur.com" class="white-text">Mayur Deshmukh</a>
+        </span>
+			</div>
+		</div>
+	</footer>
+  
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+</body>
+</html>
